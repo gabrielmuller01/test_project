@@ -39,15 +39,14 @@ function removePerson(removeButton) {
     
     var closestTr = removeButton.closest('tr');
     
-    var i = element.toString.rows.indexOf(closestTr)
-
-    console.log(i)
-
-    pessoas.splice(i, 1)
+    var array = Array.from(element.rows);
+    var i = array.indexOf(closestTr);
+    console.log('batata', i)
 
     
-    element.rows.outerHTML = "";
-     
+    pessoas.splice(i, 1)
+    
+    element.rows[i].outerHTML = "";
 }
 
 function removeSon(pessoa, i) {
@@ -70,3 +69,6 @@ addChildPerson(Rena, 'WillJR')
 addChildPerson(Rena, 'JenniJR')
 
 console.log(JSON.stringify(pessoas))
+
+1
+
