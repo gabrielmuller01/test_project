@@ -12,12 +12,12 @@ function addPerson(name) {
     element.innerHTML +=
     (
     `
-    <tr style="max-widht: 300px; display: inline-block; text-align: center; margin-bottom:10px;">
-        <td style="text-align:center; width: 200px; background-color: rgb(176, 173, 173)">
+    <tr style="max-widht: 300px; display: inline-block; text-align: center;">
+        <td style="text-align:center; width: 200px; background-color: #848482;">
             ${pessoa.nome}
         </td>
 
-        <td style="text-align:center; width: 100px; background-color: rgb(176, 173, 173)">
+        <td style="text-align:center; width: 100px; background-color:#848482;">
             <button type="button"  onclick="removePerson(this)"> Remover</button>
         </td>
 
@@ -44,19 +44,19 @@ function addChildPerson(pessoa) {
     var table = document.createElement('table'); 
     var td = document.createElement('td');
     td.appendChild(table)
-    closestTr.insertCell(2).before(td) 
+    closestTr.insertCell(2).appendChild(td) 
 
     table.innerHTML += 
     `<tr>
-        <td style=" background-color: lightgray; width: 200px;">
+        <td style=" background-color: #B6B6B4; width: 200px; text-align: left;">
             ${sonName}
         </td>
-        <td style=" background-color: lightgray; width: 100px;">
+        <td style=" background-color: #B6B6B4; widht: 100px">
             <button type="button" onclick="removeSon(this)"> Remover Filho</button>
         </td>
     </tr>`;
 
-    closestTr.cells[2].style.cssText = 'display: flex; justify-content: center;'
+    closestTr.cells[2].style.cssText = 'display: flex'
 
     callJson();
 }
@@ -76,21 +76,24 @@ function removePerson(removeButton) {
 }
 
 function removeSon(removeChildButton) {
-    
+
     var closestTable = removeChildButton.closest('table');
-    var closestTr = removeChildButton.closest('tr');
+    var closestTr = removeChildButton.closest('td');
+    
     var closestFather = closestTable.closest('tr')
     var closestFatherarray = Array.from(element.rows)
     var j = closestFatherarray.indexOf(closestFather)
 
     var array = Array.from(closestTable.rows);
     var i = array.indexOf(closestTr);
-    
-    console.log(i, 'esse aqui amigo')
+
+    var findFather = removeChildButton.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+    //console.log(findFather)
 
     pessoas[j].filhos.splice(i, 1)
     
-    closestTable.remove();
+    findFather.remove();
 
     callJson()
 }
